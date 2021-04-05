@@ -1,4 +1,4 @@
-package com.example.week3.dewmo;
+package com.example.week3.demo;
 
 import javax.servlet.*;
 import javax.servlet.http.*;

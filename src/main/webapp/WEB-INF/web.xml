@@ -9,7 +9,11 @@
     </servlet>
     <servlet>
         <servlet-name>RegisterServlet</servlet-name>
-        <servlet-class>com.example.week3.dewmo.RegisterServlet</servlet-class>
+        <servlet-class>com.example.week3.demo.RegisterServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LifeCycleServlet</servlet-name>
+        <servlet-class>com.example.week3.demo.LifeCycleServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
@@ -54,6 +58,10 @@
     <servlet-mapping>
     <servlet-name>ZhangJun</servlet-name>
     <url-pattern>/hello</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LifeCycleServlet</servlet-name>
+        <url-pattern>/life</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
