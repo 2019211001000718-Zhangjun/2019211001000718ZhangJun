@@ -1,5 +1,6 @@
 package com.example.week3.demo;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,6 +18,8 @@ public class RegisterServlet extends HttpServlet {
     Connection con=null;
     @Override
     public void init() throws ServletException {
+        super.init();
+        /*ServletContext context=getServletContext();
         String driver=getServletConfig().getServletContext().getInitParameter("driver");
         String url=getServletConfig().getServletContext().getInitParameter("url");
         String username=getServletConfig().getServletContext().getInitParameter("username");
@@ -28,6 +31,9 @@ public class RegisterServlet extends HttpServlet {
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
+
+         */
+        con= (Connection) getServletContext().getAttribute("con");
     }
 
     @Override
@@ -41,7 +47,7 @@ public class RegisterServlet extends HttpServlet {
         String password=request.getParameter("password");
         String Email=request.getParameter("email");
         String Gender=request.getParameter("gender");
-        String Date=request.getParameter("birthDate");
+        String Date=request.getParameter("birthdate");
 
         String sql1="insert into usertable values(?,?,?,?,?)";
         PreparedStatement pstmt= null;
@@ -53,20 +59,18 @@ public class RegisterServlet extends HttpServlet {
             pstmt.setString(4,Gender);
             pstmt.setString(5,Date);
             pstmt.executeUpdate();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        response.setContentType("text/html");
-        PrintWriter out=response.getWriter();
-        out.println("<html>");
+        //response.setContentType("text/html");
+        //PrintWriter out=response.getWriter();
+            String sql2="select * from usertable";
+            ResultSet rs= null;
+            rs = con.createStatement().executeQuery(sql2);
+        /*out.println("<html>");
         out.println("<head><title>Register</title></head>");
         out.println("<body>");
         out.println("<table>");
         out.println("<tr><td>ID</td><td>username</td><td>password</td><td>Email</td><td>Gender</td><td>Birthdate</td></tr>");
-        String sql2="select * from usertable";
-        ResultSet rs= null;
-        try {
-            rs = con.createStatement().executeQuery(sql2);
+
+
             while(rs.next()){
                 int id=rs.getInt("id");
                 String username=rs.getString("username");
@@ -75,13 +79,17 @@ public class RegisterServlet extends HttpServlet {
                 String gender=rs.getString("gender");
                 String birthdate=rs.getString("birthdate");
                 out.println("<tr><td>"+id+"</td><td>"+username+"</td><td>"+password1+"</td><td>"+email+"</td><td>"+gender+"</td><td>"+birthdate+"</td></tr>");
-            }
+            }*/
+            //request.setAttribute("rsname",rs);
+            //request.getRequestDispatcher("userList.jsp").forward(request,response);
+            //System.out.println("i am in RegisterServlet-->doPost()--> after forward()");
+            response.sendRedirect("login.jsp");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        out.println("</table>");
-        out.println("</body>");
-        out.println("</html>");
+        //out.println("</table>");
+        //out.println("</body>");
+        //out.println("</html>");
     }
 
     @Override

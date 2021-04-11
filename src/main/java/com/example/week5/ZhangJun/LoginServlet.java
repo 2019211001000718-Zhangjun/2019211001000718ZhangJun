@@ -49,12 +49,25 @@ public class LoginServlet extends HttpServlet {
             pstmt.setString(2, password);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
-                out.println("Login Success!!!");
-                out.println("Welcome," + username);
-            } else out.println("Login Error!!!");
+                request.setAttribute("id",rs.getInt("id"));
+                request.setAttribute("username",rs.getString("username"));
+                request.setAttribute("password",rs.getString("password"));
+                request.setAttribute("email",rs.getString("email"));
+                request.setAttribute("gender",rs.getString("gender"));
+                request.setAttribute("birthDate",rs.getString("birthDate"));
+                request.getRequestDispatcher("userInfo.jsp").forward(request,response);
+                //out.println("Login Success!!!");
+                //out.println("Welcome," + username);
+            } else {
+                request.setAttribute("message","Username or Password Error!!!");
+                request.getRequestDispatcher("login.jsp").forward(request,response);
+                //out.println("Login Error!!!");
+            }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        out.println("</body>");
+        out.println("</html>");
     }
 
         @Override
