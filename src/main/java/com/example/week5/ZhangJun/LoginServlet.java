@@ -13,17 +13,18 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        String driver=getServletConfig().getServletContext().getInitParameter("driver");
-        String url=getServletConfig().getServletContext().getInitParameter("url");
-        String username=getServletConfig().getServletContext().getInitParameter("username");
-        String password=getServletConfig().getServletContext().getInitParameter("password");
-        try {
-            Class.forName(driver);
-            con= DriverManager.getConnection(url,username,password);
-            System.out.println("init()-->"+con);
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
-        }
+//        String driver=getServletConfig().getServletContext().getInitParameter("driver");
+//        String url=getServletConfig().getServletContext().getInitParameter("url");
+//        String username=getServletConfig().getServletContext().getInitParameter("username");
+//        String password=getServletConfig().getServletContext().getInitParameter("password");
+//        try {
+//            Class.forName(driver);
+//            con= DriverManager.getConnection(url,username,password);
+//            System.out.println("init()-->"+con);
+//        } catch (ClassNotFoundException | SQLException e) {
+//            e.printStackTrace();
+//        }
+        con= (Connection) getServletContext().getAttribute("con");
     }
 
     @Override
