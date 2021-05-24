@@ -1,6 +1,5 @@
 package com.example.dao;
 
-
 import com.example.model.Product;
 
 import java.sql.*;
@@ -63,7 +62,7 @@ public class ProductDao implements  IProductDao{
         pstmt.setInt(1,productId);
         ResultSet rs= pstmt.executeQuery();
         Product product=null;
-        if(rs.next()){
+        while(rs.next()){
             product=new Product();
             product.setProductId(rs.getInt("ProductId"));
             product.setProductName(rs.getString("ProductName"));
@@ -131,6 +130,10 @@ public class ProductDao implements  IProductDao{
             product.setPrice(rs.getDouble("price"));
             product.setCategoryId(rs.getInt("CategoryId"));
             pro.add(product);
+        }
+        for (Product p:pro
+             ) {
+            System.out.println("findAll"+p);
         }
         return pro;
     }
