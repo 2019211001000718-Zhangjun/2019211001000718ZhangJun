@@ -1,31 +1,33 @@
-package com.example.controlle;
+package com.lab3;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.sql.Connection;
+import java.io.PrintWriter;
 
-@WebServlet(name = "ContactUsServlet", value = "/contactUs")
-public class ContactUsServlet extends HttpServlet {
-    Connection con = null;
+@WebServlet(name = "HitCountServlet", value = "/HitCountServlet")
+public class HitCountServlet extends HttpServlet {
+    int flag=3;
+
     @Override
     public void init() throws ServletException {
-        con = (Connection) getServletContext().getAttribute("con");
-    }
+        super.init();
 
-    @Override
-    public void destroy() {
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String path = "../WEB-INF/views/contactUs.jsp";
-        request.getRequestDispatcher(path).forward(request,response);
+        PrintWriter out = response.getWriter();
+        out.println("<html><body>");
+        out.println("<center><h1> Total Number of Hits </h1>");
+        out.println("<h1>" + flag + "</h1></center>");
+        out.println("</html></body>");
+        flag++;
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request, response);
+
     }
 }
