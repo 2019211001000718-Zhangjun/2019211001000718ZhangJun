@@ -20,7 +20,7 @@ public class ContactUsServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String path = "/WEB-INF/views/contactUs.jsp";
+        String path = "../WEB-INF/views/contactUs.jsp";
         request.getRequestDispatcher(path).forward(request,response);
     }
 
